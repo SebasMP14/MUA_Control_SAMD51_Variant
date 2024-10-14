@@ -15,6 +15,11 @@
   License along with this library; if not, write to the Free Software
   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
+/**
+ * PIO_SERCOM:      First SERCOM
+ * PIO_SERCOM_ALT:  Second SERCOM
+ */
+
 
 #include "variant.h"
 
@@ -28,17 +33,17 @@ const PinDescription g_APinDescription[]=
   { PORTB,  5, PIO_DIGITAL,   PIN_ATTR_NONE,  No_ADC_Channel, NOT_ON_PWM, NOT_ON_TIMER, EXTERNAL_INT_5 },  // D1 
   { PORTB,  6, PIO_DIGITAL,   PIN_ATTR_NONE,  No_ADC_Channel, NOT_ON_PWM, NOT_ON_TIMER, EXTERNAL_INT_6 },  // D2
   { PORTB,  7, PIO_DIGITAL,   PIN_ATTR_NONE,  No_ADC_Channel, NOT_ON_PWM, NOT_ON_TIMER, EXTERNAL_INT_7 },  // D3
-  { PORTB,  8, PIO_DIGITAL,   PIN_ATTR_NONE,  No_ADC_Channel, TC4_CH0,    TC4_CH0,      EXTERNAL_INT_8 },  // D4
+  { PORTB,  8, PIO_TIMER,   PIN_ATTR_PWM_E,  No_ADC_Channel, TC4_CH0,    TC4_CH0,      EXTERNAL_INT_8 },  // D4
   { PORTB,  9, PIO_DIGITAL,   PIN_ATTR_NONE,  No_ADC_Channel, TC4_CH1,    TC4_CH1,      EXTERNAL_INT_9 },  // D5
   { PORTB, 10, PIO_COM,       PIN_ATTR_NONE,  No_ADC_Channel, TCC1_CH0,   TC5_CH0,      EXTERNAL_INT_10 }, // D6     QSPI_SCK  // PIO_DIGITAL
   { PORTB, 11, PIO_COM,       PIN_ATTR_NONE,  No_ADC_Channel, TCC1_CH1,   TC5_CH1,      EXTERNAL_INT_11 }, // D7     QSPI_CS   // PIO_DIGITAL
-  { PORTB, 12, PIO_DIGITAL,   PIN_ATTR_PWM_G, No_ADC_Channel, TCC3_CH0,   TC4_CH0,      EXTERNAL_INT_12 }, // D8
+  { PORTB, 12, PIO_DIGITAL,   PIN_ATTR_PWM_G, No_ADC_Channel, TCC3_CH0,   NOT_ON_TIMER/*TC4_CH0*/,      EXTERNAL_INT_12 }, // D8
   { PORTB, 13, PIO_DIGITAL,   PIN_ATTR_PWM_G, No_ADC_Channel, TCC0_CH1,   TC4_CH1,      EXTERNAL_INT_13 }, // D9
   { PORTA, 14, PIO_DIGITAL,   PIN_ATTR_PWM_G, No_ADC_Channel, TCC2_CH0,   TC3_CH0,      EXTERNAL_INT_14 }, // D10
   { PORTA, 15, PIO_DIGITAL,   PIN_ATTR_PWM_G, No_ADC_Channel, TCC2_CH1,   TC3_CH1,      EXTERNAL_INT_15 }, // D12
   { PORTA, 18, PIO_DIGITAL,   PIN_ATTR_PWM_F, No_ADC_Channel, TCC1_CH2,   TC3_CH0,      EXTERNAL_INT_2 },  // D12 - I2C_INT
-  { PORTA, 23, PIO_DIGITAL,   PIN_ATTR_PWM_G, No_ADC_Channel, TCC0_CH3,   TC4_CH1,      EXTERNAL_INT_7 }, // D13
-  { PORTA, 19, PIO_DIGITAL,   PIN_ATTR_NONE,  No_ADC_Channel, TCC1_CH3,   TC3_CH1,      EXTERNAL_INT_3 },  // D14 - 3.3V_EN
+  { PORTA, 23, PIO_DIGITAL,   PIN_ATTR_PWM_G, No_ADC_Channel, TCC0_CH3,   TC4_CH1,      EXTERNAL_INT_7 },  // D13
+  { PORTA, 19, PIO_DIGITAL,   PIN_ATTR_NONE,  No_ADC_Channel, TCC1_CH3,   NOT_ON_TIMER,      EXTERNAL_INT_3 },  // D14 - 3.3V_EN
   { PORTB, 22, PIO_DIGITAL,   PIN_ATTR_NONE,  No_ADC_Channel, NOT_ON_PWM, TC7_CH0,      EXTERNAL_INT_6 },  // D15 - FLASH WP
   { PORTB, 23, PIO_DIGITAL,   PIN_ATTR_NONE,  No_ADC_Channel, NOT_ON_PWM, TC7_CH1,      EXTERNAL_INT_7 },  // D16 - FLASH HOLD
   // ------------------------------------------------------------------------------------------------------------------------- 
@@ -73,25 +78,25 @@ const PinDescription g_APinDescription[]=
   { PORTA, 25, PIO_COM,     PIN_ATTR_NONE, No_ADC_Channel, NOT_ON_PWM, NOT_ON_TIMER, EXTERNAL_INT_9 },       // USB DP
   // ------------------------------------------------------------------------------------------------------------==-----
 
-  // UART
+  // UART : SERCOM5
   // 32..33
   // -----------------------------------------------------------------------------------------------------------------------
-  { PORTB, 31, PIO_SERCOM_ALT, PIN_ATTR_NONE, No_ADC_Channel, NOT_ON_PWM, TC0_CH0, EXTERNAL_INT_15 },        // 5 SER1.0 TX
-  { PORTB, 30, PIO_SERCOM_ALT, PIN_ATTR_NONE, No_ADC_Channel, NOT_ON_PWM, TC0_CH0, EXTERNAL_INT_14 },        // 6 SER1.1 RX
+  { PORTB, 31, PIO_SERCOM_ALT, PIN_ATTR_NONE, No_ADC_Channel, NOT_ON_PWM, TC0_CH0, EXTERNAL_INT_15 },        // 5? SER5.0 TX
+  { PORTB, 30, PIO_SERCOM_ALT, PIN_ATTR_NONE, No_ADC_Channel, NOT_ON_PWM, TC0_CH0, EXTERNAL_INT_14 },        // 6? SER5.1 RX
   // -----------------------------------------------------------------------------------------------------------------------
   
-  // I2C pins (SDA/SCL)
+  // I2C pins (SDA/SCL) : SERCOM3
   // 34..35
   // -----------------------------------------------------------------------------------------------------------------------
   { PORTA, 16, PIO_SERCOM_ALT, PIN_ATTR_PWM_F, No_ADC_Channel, TCC1_CH0, TC2_CH0, EXTERNAL_INT_0 },          // SCL  SER3.1
-  { PORTA, 17, PIO_SERCOM_ALT, PIN_ATTR_PWM_G, No_ADC_Channel, TCC0_CH5, TC2_CH1, EXTERNAL_INT_1 },          // SDA  SER3.0
+  { PORTA, 17, PIO_SERCOM_ALT, PIN_ATTR_PWM_G, No_ADC_Channel, TCC0_CH5, NOT_ON_TIMER, EXTERNAL_INT_1 },          // SDA  SER3.0
   // -----------------------------------------------------------------------------------------------------------------------
 
-  // I2C1 (SDA1/SCL1) ///////////// CAMBIADO A UART2 = Serial2
+  // I2C1 (SDA1/SCL1) ///////////// CAMBIADO A UART2 -> Serial2
   // 36..37
   // -----------------------------------------------------------------------------------------------------------------------------
-  { PORTA, 12, PIO_SERCOM_ALT, PIN_ATTR_PWM_G, No_ADC_Channel, TCC1_CH2, TC2_CH0, EXTERNAL_INT_12 },             // SCL1 - RX [SER4.1] - TX [SER2.0]
-  { PORTA, 13, PIO_SERCOM_ALT, PIN_ATTR_PWM_G, No_ADC_Channel, TCC1_CH3, TC2_CH1, EXTERNAL_INT_13 },             // SDA1 - TX [SER4.0] - RX [SER2.1]
+  { PORTA, 12, PIO_SERCOM, PIN_ATTR_PWM_G, No_ADC_Channel, TCC1_CH2, TC2_CH0, EXTERNAL_INT_12 },             // SCL1 - RX [SER4.1] - TX [SER2.0]
+  { PORTA, 13, PIO_SERCOM, PIN_ATTR_PWM_G, No_ADC_Channel, TCC1_CH3, NOT_ON_TIMER, EXTERNAL_INT_13 },             // SDA1 - TX [SER4.0] - RX [SER2.1]
   // -----------------------------------------------------------------------------------------------------------------------------
   
   // CAN BUS (CANRX/CANTX)
@@ -112,7 +117,7 @@ const PinDescription g_APinDescription[]=
   { PORTA, 20, PIO_DIGITAL, PIN_ATTR_DIGITAL, No_ADC_Channel, NOT_ON_PWM, NOT_ON_TIMER, EXTERNAL_INT_4 },    // FS
   // ---------------------------------------------------------------------------------------------------------------------
 
-  // // SPI (COPI, CIPO, SCK, CS)
+  // // SPI (COPI, CIPO, SCK, CS) // ORIGINAL
   // // 45....48
   // // ---------------------------------------------------------------------------------------------------------------------
   // { PORTA,  4, PIO_SERCOM_ALT, PIN_ATTR_DIGITAL, No_ADC_Channel, NOT_ON_PWM, NOT_ON_TIMER, EXTERNAL_INT_4 },// COPI
@@ -121,7 +126,7 @@ const PinDescription g_APinDescription[]=
   // { PORTA,  7, PIO_DIGITAL, PIN_ATTR_DIGITAL, No_ADC_Channel, NOT_ON_PWM, NOT_ON_TIMER, EXTERNAL_INT_7 },// CS
   // // ---------------------------------------------------------------------------------------------------------------------
 
-  // SPI (MOSI, SCK, MISO, CS)   // AGREGADO/MODIFICADO Sebas
+  // SPI (MOSI, SCK, MISO, CS) : SERCOM0  // AGREGADO/MODIFICADO Sebas
   // 45....48
   // ---------------------------------------------------------------------------------------------------------------------
   { PORTA,  4, PIO_SERCOM_ALT, PIN_ATTR_PWM_E, No_ADC_Channel, NOT_ON_PWM, NOT_ON_TIMER, EXTERNAL_INT_4 },// COPI
@@ -140,7 +145,7 @@ const PinDescription g_APinDescription[]=
   // { PORTA,  7, PIO_DIGITAL, PIN_ATTR_DIGITAL, No_ADC_Channel, NOT_ON_PWM, NOT_ON_TIMER, EXTERNAL_INT_7 }, // D3 
   // // ---------------------------------------------------------------------------------------------------------------------
 
-  // SPI1 (COPI1, CIPO1, SCK1, CS1)
+  // SPI1 (COPI1, CIPO1, SCK1, CS1) // ORIGINAL
   // 49....52
   // -----------------------------------------------------------------------------------------------------------------------
   // { PORTA,  9,  PIO_SERCOM_ALT, PIN_ATTR_DIGITAL, No_ADC_Channel, NOT_ON_PWM, NOT_ON_TIMER, EXTERNAL_INT_9 },// COPI1 SER2.0
@@ -149,19 +154,27 @@ const PinDescription g_APinDescription[]=
   // { PORTA, 11,  PIO_SERCOM_ALT, PIN_ATTR_DIGITAL, No_ADC_Channel, NOT_ON_PWM, NOT_ON_TIMER, EXTERNAL_INT_11 },// CS1   SER2.3
   // -----------------------------------------------------------------------------------------------------------------------
  
-  // QSPI (D0, D1, D2, D3)
+  // QSPI (D0, D1, D2, D3) // AGREGADO/MODIFICADO
   // 49....52
+  // -----------------------------------------------------------------------------------------------------------------------
   { PORTA,  8,  PIO_COM, PIN_ATTR_NONE, No_ADC_Channel, NOT_ON_PWM, NOT_ON_TIMER, EXTERNAL_INT_NMI },// SCK1  SER2.1
   { PORTA,  9,  PIO_COM, PIN_ATTR_NONE, No_ADC_Channel, NOT_ON_PWM, NOT_ON_TIMER, EXTERNAL_INT_9 },// COPI1 SER2.0
   { PORTA, 10,  PIO_COM, PIN_ATTR_NONE, No_ADC_Channel, NOT_ON_PWM, NOT_ON_TIMER, EXTERNAL_INT_10 },// CIPO1 SER2.2
   { PORTA, 11,  PIO_COM, PIN_ATTR_NONE, No_ADC_Channel, NOT_ON_PWM, NOT_ON_TIMER, EXTERNAL_INT_11 },// CS1   SER2.3
-
-
+// -----------------------------------------------------------------------------------------------------------------------
+ 
   // AREF
   // 53 
   // ---------------------------------------------------------------------------------------------------------------------
-  { PORTA,  3, PIO_ANALOG, PIN_ATTR_ANALOG, ADC_Channel1, NOT_ON_PWM, NOT_ON_TIMER, EXTERNAL_INT_NONE }, // DAC/VREFP
+  { PORTA,  3, PIO_ANALOG, PIN_ATTR_ANALOG, ADC_Channel1,   NOT_ON_PWM, NOT_ON_TIMER, EXTERNAL_INT_NONE }, // DAC/VREFP
   // ---------------------------------------------------------------------------------------------------------------------
+
+  // TC utilizado con PA15 -> TC3_CH1
+  // 54
+  // -----------------------------------------------------------------------------------------------------------------------
+  { PORTA, 1, PIO_DIGITAL, PIN_ATTR_NONE,   No_ADC_Channel, TC2_CH1,    TC2_CH1,      EXTERNAL_INT_1},
+  // -----------------------------------------------------------------------------------------------------------------------
+
 } ;
 
 const void* g_apTCInstances[TCC_INST_NUM+TC_INST_NUM]={ TCC0, TCC1, TCC2, TCC3, TCC4, TC0, TC1, TC2, TC3, TC4, TC5, TC6 };

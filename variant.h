@@ -246,8 +246,8 @@ static const uint8_t SCL = PIN_WIRE_SCL;
 
 // Serial2
 //---------------------------------------------- // AGREGADO
-#define PIN_SERIAL2_RX       (37ul) // PA13
 #define PIN_SERIAL2_TX       (36ul) // PA12
+#define PIN_SERIAL2_RX       (37ul) // PA13
 #define PAD_SERIAL2_TX       (UART_TX_PAD_0)
 #define PAD_SERIAL2_RX       (SERCOM_RX_PAD_1)
 
@@ -295,7 +295,7 @@ extern SERCOM sercom0; // SPI
 extern SERCOM sercom1; // I2S occupies lines
 extern SERCOM sercom2; // Serial2           // CAMBIADO
 extern SERCOM sercom3; // I2C 
-extern SERCOM sercom4; // I2C1 or Serial2
+extern SERCOM sercom4; // 
 extern SERCOM sercom5; // Serial1
 
 extern Uart Serial1;
