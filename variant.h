@@ -1,4 +1,5 @@
 /*
+  @file varian.h
   Copyright (c) 2014-2015 Arduino LLC.  All right reserved.
 
   This library is free software; you can redistribute it and/or
@@ -6,21 +7,13 @@
   License as published by the Free Software Foundation; either
   version 2.1 of the License, or (at your option) any later version.
 
-  This library is distributed in the hope that it will be useful,
-  but WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-  See the GNU Lesser General Public License for more details.
+  Modified by Sebas Monje <2024-2025> to M.U.A. MISSION
 
-  You should have received a copy of the GNU Lesser General Public
-  License along with this library; if not, write to the Free Software
-  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+  -> GuaraníSat2 -> MUA_Control -> FIUNA -> LME
 */
 
 #ifndef _VARIANT_SAMD51_MICROMOD_
 #define _VARIANT_SAMD51_MICROMOD_
-
-// #define PLACA_PRUEBAS
-#define PLACA_FINAL
 
 // The definitions here needs a SAMD core >=1.6.10
 #define ARDUINO_SAMD_VARIANT_COMPLIANCE 10610
@@ -38,6 +31,9 @@
 #define VARIANT_GCLK0_FREQ (120000000UL)
 #define VARIANT_GCLK1_FREQ (48000000UL)
 #define VARIANT_GCLK2_FREQ (100000000UL)
+
+// #define PLACA_PRUEBAS
+#define PLACA_FINAL
 
 //----------------------------------------------------------------------------
 //        Headers
@@ -379,7 +375,7 @@ extern "C"
 #define G2  4   // DIO
 #define G3  5   // DIO
 #define G4  6   // DIO
-#define G5  8   // DIO
+#define G5  8   // LED_SiPM1
 #define G6  21  // NC
 #define G7  22  // INTERFACE_EN
 #define G8  25  // CS_MAX2
@@ -392,6 +388,7 @@ extern "C"
 #define G15 40  // NC
 #define G16 41  // NC
 #define G17 46  // PULSE_2
+#define G18 7   // LED_SiPM2
 
 
 // LEDs
@@ -521,6 +518,7 @@ static const uint8_t SCL1 = PIN_WIRE1_SCL;
 //----------------------------------------------
 #define PIN_USB_DM          (37ul)  // PA24
 #define PIN_USB_DP          (38ul)  // PA25
+#define PIN_USB_HOST_ENABLE (41ul)
 //----------------------------------------------
 
 #ifdef __cplusplus
@@ -561,4 +559,3 @@ extern Uart Serial2;
 #endif
 
 #endif // SAMD51 MicroMod Processor Board
-

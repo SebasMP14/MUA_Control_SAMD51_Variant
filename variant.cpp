@@ -1,4 +1,5 @@
 /*
+  @file 
   Copyright (c) 2014-2015 Arduino LLC.  All right reserved.
 
   This library is free software; you can redistribute it and/or
@@ -6,14 +7,9 @@
   License as published by the Free Software Foundation; either
   version 2.1 of the License, or (at your option) any later version.
 
-  This library is distributed in the hope that it will be useful,
-  but WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-  See the GNU Lesser General Public License for more details.
+  Modified by Sebas Monje <2024-2025> to M.U.A. MISSION
 
-  You should have received a copy of the GNU Lesser General Public
-  License along with this library; if not, write to the Free Software
-  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+  -> GuaraníSat2 -> MUA_Control -> FIUNA -> LME
 */
 /**
  * PIO_SERCOM:      First SERCOM
@@ -89,8 +85,8 @@ const PinDescription g_APinDescription[]=
   // I2C pins (SDA/SCL) : SERCOM3
   // 34..35
   // -----------------------------------------------------------------------------------------------------------------------
-  { PORTA, 16, PIO_SERCOM_ALT, PIN_ATTR_PWM_F, No_ADC_Channel, TCC1_CH0, TC2_CH0, EXTERNAL_INT_0 },          // SCL  SER3.1
-  { PORTA, 17, PIO_SERCOM_ALT, PIN_ATTR_PWM_G, No_ADC_Channel, TCC0_CH5, NOT_ON_TIMER, EXTERNAL_INT_1 },          // SDA  SER3.0
+  { PORTA, 16, PIO_SERCOM_ALT, PIN_ATTR_PWM_F, No_ADC_Channel, TCC1_CH0, TC2_CH0, EXTERNAL_INT_0 },// SCL  SER3.1
+  { PORTA, 17, PIO_SERCOM_ALT, PIN_ATTR_PWM_G, No_ADC_Channel, TCC0_CH5, NOT_ON_TIMER, EXTERNAL_INT_1 },// SDA  SER3.0
   // -----------------------------------------------------------------------------------------------------------------------
 
   // I2C1 (SDA1/SCL1) ///////////// CAMBIADO A UART2 -> Serial2
@@ -249,13 +245,13 @@ const PinDescription g_APinDescription[]=
   // 5 ... 8 - DIGITAL I/O
   { PORTB,  6, PIO_DIGITAL,     PIN_ATTR_NONE,    No_ADC_Channel, NOT_ON_PWM, NOT_ON_TIMER, EXTERNAL_INT_6 },
   { PORTB,  7, PIO_DIGITAL,     PIN_ATTR_NONE,    No_ADC_Channel, NOT_ON_PWM, NOT_ON_TIMER, EXTERNAL_INT_7 },
-  { PORTB,  8, PIO_TIMER,       PIN_ATTR_PWM_E,   No_ADC_Channel, TC4_CH0,    TC4_CH0,      EXTERNAL_INT_8 },
+  { PORTB,  8, PIO_DIGITAL,     PIN_ATTR_PWM_E,   No_ADC_Channel, TC4_CH0,    TC4_CH0,      EXTERNAL_INT_8 },
   { PORTB,  9, PIO_DIGITAL,     PIN_ATTR_NONE,    No_ADC_Channel, TC4_CH1,    TC4_CH1,      EXTERNAL_INT_9 },
 
   // 9 ... 12 - SPI1 (MOSI1, SCK1, MISO1, CS1) : SERCOM 0 - ADC      // PAD_0 (MOSI), PAD_1 (SCK), PAD_2 (MISO)
-  { PORTA,  4, PIO_SERCOM_ALT,  PIN_ATTR_PWM_E,   No_ADC_Channel, NOT_ON_PWM, NOT_ON_TIMER, EXTERNAL_INT_4 },
-  { PORTA,  5, PIO_SERCOM_ALT,  PIN_ATTR_PWM_E,   No_ADC_Channel, NOT_ON_PWM, NOT_ON_TIMER, EXTERNAL_INT_5 },
-  { PORTA,  6, PIO_SERCOM_ALT,  PIN_ATTR_PWM_E,   No_ADC_Channel, NOT_ON_PWM, NOT_ON_TIMER, EXTERNAL_INT_6 },
+  { PORTA,  4, PIO_SERCOM_ALT,  PIN_ATTR_PWM_E,   No_ADC_Channel, TC0_CH0,    TC0_CH0,      EXTERNAL_INT_4 },
+  { PORTA,  5, PIO_SERCOM_ALT,  PIN_ATTR_PWM_E,   No_ADC_Channel, TC0_CH1,    NOT_ON_TIMER, EXTERNAL_INT_5 },
+  { PORTA,  6, PIO_SERCOM_ALT,  PIN_ATTR_PWM_E,   No_ADC_Channel, TC1_CH0,    TC1_CH0,      EXTERNAL_INT_6 },
   { PORTA,  7, PIO_DIGITAL,     PIN_ATTR_DIGITAL, No_ADC_Channel, NOT_ON_PWM, NOT_ON_TIMER, EXTERNAL_INT_7 },
 
   // 13 ... 18 - QSPI (D0, D1, D2, D3, SCK, CS) - FLASH MEMORY
