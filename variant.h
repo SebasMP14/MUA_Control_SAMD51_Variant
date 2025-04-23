@@ -34,6 +34,7 @@
 
 // #define PLACA_PRUEBAS
 #define PLACA_FINAL
+// #define CORRECCION
 
 //----------------------------------------------------------------------------
 //        Headers
@@ -418,6 +419,7 @@ static const uint8_t ATN = PIN_ATN;
 // Serial Interfaces
 //-------------------------------------------
 
+#ifndef CORRECCION
 // Serial1 
 #define PIN_SERIAL1_TX       (19ul) // PB12
 #define PIN_SERIAL1_RX       (20ul) // PB13
@@ -430,7 +432,20 @@ static const uint8_t ATN = PIN_ATN;
 #define PAD_SERIAL2_TX       (UART_TX_PAD_0)
 #define PAD_SERIAL2_RX       (SERCOM_RX_PAD_1)
 //-------------------------------------------
+#else
+// Serial2 
+#define PIN_SERIAL2_TX       (19ul) // PB12
+#define PIN_SERIAL2_RX       (20ul) // PB13
+#define PAD_SERIAL2_TX       (UART_TX_PAD_0)
+#define PAD_SERIAL2_RX       (SERCOM_RX_PAD_1)
 
+// Serial1
+#define PIN_SERIAL1_TX       (31ul) // PB16
+#define PIN_SERIAL1_RX       (32ul) // PB17
+#define PAD_SERIAL1_TX       (UART_TX_PAD_0)
+#define PAD_SERIAL1_RX       (SERCOM_RX_PAD_1)
+//-------------------------------------------
+#endif
 
 // SPI Interfaces
 //-------------------------------------------
@@ -538,8 +553,8 @@ extern SERCOM sercom0;          // SPI1
 extern SERCOM sercom1;          // SPI
 extern SERCOM sercom2;          // I2C
 extern SERCOM sercom3;          // I2C1
-extern SERCOM sercom4;          // Serial1
-extern SERCOM sercom5;          // Serial2
+extern SERCOM sercom4;          // Serial1 -> CORRECCION Serial2
+extern SERCOM sercom5;          // Serial2 -> CORRECCION Serial1
 
 extern Uart Serial1;
 extern Uart Serial2;

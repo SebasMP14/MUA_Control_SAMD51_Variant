@@ -262,7 +262,8 @@ const PinDescription g_APinDescription[]=
   { PORTB, 10, PIO_COM,         PIN_ATTR_NONE,    No_ADC_Channel, TCC1_CH0,   TC5_CH0,      EXTERNAL_INT_10 },
   { PORTB, 11, PIO_COM,         PIN_ATTR_NONE,    No_ADC_Channel, TCC1_CH1,   TC5_CH1,      EXTERNAL_INT_11 },
 
-  // 19 ... 20 - UART (Tx, Rx) : SERCOM 4 - Serial 1 - OBC        // PAD_0 (Tx), PAD_1 (Rx)
+  // 19 ... 20 - UART (Tx, Rx) : SERCOM 4 - Serial 1 - OBC        // PAD_0 (Tx), PAD_1 (Rx) // 
+  // 19 ... 20 - UART (Tx, Rx) : SERCOM 4 - Serial 1 - GPS        // PAD_0 (Tx), PAD_1 (Rx) // CORRECCION
   { PORTB, 12, PIO_SERCOM,      PIN_ATTR_PWM_G,   No_ADC_Channel, TCC3_CH0,   NOT_ON_TIMER, EXTERNAL_INT_12 },
   { PORTB, 13, PIO_SERCOM,      PIN_ATTR_PWM_G,   No_ADC_Channel, TCC0_CH1,   TC4_CH1,      EXTERNAL_INT_13 },
 
@@ -289,6 +290,7 @@ const PinDescription g_APinDescription[]=
   { PORTA, 19, PIO_DIGITAL,     PIN_ATTR_DIGITAL, No_ADC_Channel, NOT_ON_PWM, NOT_ON_TIMER, EXTERNAL_INT_3 },// D14 - 3.3V_EN
 
   // 31 ... 32 - UART (Tx, Rx): SERCOM 5 - Serial 2 - GPS
+  // 31 ... 32 - UART (Tx, Rx): SERCOM 5 - Serial 2 - OBC   // CORRECCION
   { PORTB, 16, PIO_SERCOM,      PIN_ATTR_PWM_G,   No_ADC_Channel, TCC3_CH0,   TC6_CH0,      EXTERNAL_INT_0 },
   { PORTB, 17, PIO_SERCOM,      PIN_ATTR_PWM_F,   No_ADC_Channel, TCC3_CH1,   TC6_CH1,      EXTERNAL_INT_1 },
 
@@ -345,6 +347,7 @@ SERCOM sercom3( SERCOM3 ) ;
 SERCOM sercom4( SERCOM4 ) ;
 SERCOM sercom5( SERCOM5 ) ;
 
+#ifndef CORRECCION
 Uart Serial1( &sercom4, PIN_SERIAL1_RX, PIN_SERIAL1_TX, PAD_SERIAL1_RX, PAD_SERIAL1_TX ) ;
 Uart Serial2( &sercom5, PIN_SERIAL2_RX, PIN_SERIAL2_TX, PAD_SERIAL2_RX, PAD_SERIAL2_TX ) ;
 
@@ -381,6 +384,44 @@ void SERCOM5_3_Handler()
 {
   Serial2.IrqHandler();
 }
+#else
+Uart Serial2( &sercom4, PIN_SERIAL1_RX, PIN_SERIAL1_TX, PAD_SERIAL1_RX, PAD_SERIAL1_TX ) ;
+Uart Serial1( &sercom5, PIN_SERIAL2_RX, PIN_SERIAL2_TX, PAD_SERIAL2_RX, PAD_SERIAL2_TX ) ;
+
+void SERCOM4_0_Handler()
+{
+  Serial2.IrqHandler();
+}
+void SERCOM4_1_Handler()
+{
+  Serial2.IrqHandler();
+}
+void SERCOM4_2_Handler()
+{
+  Serial2.IrqHandler();
+}
+void SERCOM4_3_Handler()
+{
+  Serial2.IrqHandler();
+}
+
+void SERCOM5_0_Handler()
+{
+  Serial1.IrqHandler();
+}
+void SERCOM5_1_Handler()
+{
+  Serial1.IrqHandler();
+}
+void SERCOM5_2_Handler()
+{
+  Serial1.IrqHandler();
+}
+void SERCOM5_3_Handler()
+{
+  Serial1.IrqHandler();
+}
+#endif
 #endif
 
 
