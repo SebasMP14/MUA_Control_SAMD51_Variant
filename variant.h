@@ -34,7 +34,7 @@
 
 // #define PLACA_PRUEBAS
 #define PLACA_FINAL
-// #define CORRECCION
+#define CORRECCION
 
 //----------------------------------------------------------------------------
 //        Headers
